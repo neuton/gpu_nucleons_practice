@@ -17,6 +17,9 @@ How to run
 just run "main.py" (choose graphics options; when loaded, press [Enter] to start/stop simulation, use mouse/[+]/[-] to change point of view, [Esc] to quit);
 "make" is executed by script, so it's not necessary to run it manually.
 
+Note: in case you use CUDA SDK instead of AMD APP SDK, please at first modify "builddef.txt" file by specifying appropriate paths.
+
+
 Short description
 --------------
 Computation of particles positions is implemented in OpenCL C, C is used for OpenCL runtime calls.
