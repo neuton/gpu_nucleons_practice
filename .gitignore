@@ -1,0 +1,13 @@
+*.pyc
+*.bat
+*.log
+*.o
+*~
+host.h
+kernel.h
+test.exe
+host.dll
+ogre.cfg
+plugins/*
+OGRE/*
+OIS/*
