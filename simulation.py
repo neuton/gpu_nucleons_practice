@@ -93,20 +93,33 @@ class SimulationScene(Scene):
             self._scene_setting_1()
         elif scene_setting == '2':
             self._scene_setting_2()
-        print 'generating kernel header...'
-        with open('kernel.h', 'w') as kernel_header:
-            kernel_header.write('#define ln ' + str(work_group_size) + ' // work group size\n')
-            kernel_header.write('#define dt ' + str(dt) + ' // iteration delta-time\n')
-            kernel_header.write('#define td ' + str(1./dt) + ' // 1/dt\n')
-            kernel_header.write('#define dt2 ' + str(dt/2.) + ' // dt/2\n')
-            #kernel_header.write('static const v3r B=(v3r)(' + str(magnetic_field[0]) + ',' + str(magnetic_field[1]) + ',' + str(magnetic_field[2]) + ',' + str(0) + '); // external magnetic field\n')
-        print 'generating host header...'
-        with open('host.h', 'w') as host_header:
-            host_header.write('#define ln ' + str(work_group_size) + ' // work group size\n')
-            host_header.write('#define dt ' + str(dt) + ' // iteration delta-time\n')
-            host_header.write('#define td ' + str(1./dt) + ' // 1/dt\n')
-            host_header.write('#define dt2 ' + str(dt/2.) + ' // dt/2\n')
-            #host_header.write('static const v3r B ={{' + str(magnetic_field[0]) + ',' + str(magnetic_field[1]) + ',' + str(magnetic_field[2]) + ',' + str(0) + '}}; // external magnetic field\n')
+        read_lines = ''
+        write_lines = ''
+        with open('kernel.h', 'r+') as kernel_header:
+            for line in kernel_header:
+                read_lines += line
+            write_lines += '#define ln ' + str(work_group_size) + ' // work group size\n'
+            write_lines += '#define dt ' + str(dt) + ' // iteration delta-time\n'
+            write_lines += '#define td ' + str(1./dt) + ' // 1/dt\n'
+            write_lines += '#define dt2 ' + str(dt/2.) + ' // dt/2\n'
+            if write_lines != read_lines:
+                print 'generating kernel header...'
+                kernel_header.seek(0)
+                kernel_header.write(write_lines)
+                kernel_header.truncate()
+        read_lines = ''
+        write_lines = ''
+        with open('host.h', 'r+') as host_header:
+            for line in host_header:
+                read_lines += line
+            write_lines += '#define dt ' + str(dt) + ' // iteration delta-time\n'
+            write_lines += '#define td ' + str(1./dt) + ' // 1/dt\n'
+            write_lines += '#define dt2 ' + str(dt/2.) + ' // dt/2\n'
+            if write_lines != read_lines:
+                print 'generating host header...'
+                host_header.seek(0)
+                host_header.write(write_lines)
+                host_header.truncate()
         print 'building host...'
         if call('make') != 0:
             raise Exception('Error making host')
