@@ -12,6 +12,8 @@ Requirements
 - python-ogre (download OGRE, OIS and "plugins" and place them into the root directory:
 https://www.dropbox.com/sh/4i852xb5w9i2dtr/AACE6H5EkiKNDD0jkYht77UGa (for Windows))
 
+Note: gcc bitness must correspond to python bitness (in case of MinGW -- x32)
+
 How to run
 --------------
 just run "main.py" (choose graphics options; when loaded, press [Enter] to start/stop simulation, use mouse/[+]/[-] to change point of view, [Esc] to quit);
@@ -50,7 +52,7 @@ Tasks
 --------------
 - download and successfully run (don't forget to meet requirements)
 - tune strong interaction (potential) so that simulation would look at least slightly plausible
-- write your own fast, clear and simple visualization code (OGRE is an overkill for this purpose, I'd recommend using OpenGL-OpenCL interoperability through shared context and VBO); note that this is a heavy task though
+- write your own fast, clear and simple visualization code (OGRE is an overkill for this purpose, I'd recommend using OpenGL-OpenCL interoperability through shared context and VBO); note that this is a heavy task though; you may use, for example, particles simulation code from CUDA OpenCL examples
 - maybe create some user interface (UI), for example with QT (PyQT or whatever)
 - experiment more with particles interactions; any ideas and improvements concerning algorithm/model/potentials etc. are welcome; maybe try to implement "solid spheres" collisions
 - play/modify/improve/do whatever you'd like, make some cool things
