@@ -74,6 +74,7 @@ class ParticlesContainer(SceneObject):
 from time import clock
 from subprocess import call
 from ctypes import cdll, Structure, c_float, c_uint, c_int, byref
+from os.path import isfile
 
 class V3r(Structure):
     _fields_ = [("x", c_float), ("y", c_float), ("z", c_float), ("w", c_float)] # cl_float4
@@ -99,19 +100,19 @@ class SimulationScene(Scene):
             kernel_header.write('#define dt ' + str(dt) + ' // iteration delta-time\n')
             kernel_header.write('#define td ' + str(1./dt) + ' // 1/dt\n')
             kernel_header.write('#define dt2 ' + str(dt/2.) + ' // dt/2\n')
-            kernel_header.write('static const v3r B=(v3r)(' + str(magnetic_field[0]) + ',' + str(magnetic_field[1]) + ',' + str(magnetic_field[2]) + ',' + str(0) + '); // external magnetic field\n')
+            kernel_header.write('__constant static const v3r B=(v3r)(' + str(magnetic_field[0]) + ',' + str(magnetic_field[1]) + ',' + str(magnetic_field[2]) + ',' + str(0) + '); // external magnetic field\n')
         print 'generating host header...'
         with open('host.h', 'w') as kernel_header:
             kernel_header.write('#define ln ' + str(work_group_size) + ' // work group size\n')
             kernel_header.write('#define dt ' + str(dt) + ' // iteration delta-time\n')
             kernel_header.write('#define td ' + str(1./dt) + ' // 1/dt\n')
             kernel_header.write('#define dt2 ' + str(dt/2.) + ' // dt/2\n')
-            kernel_header.write('static const v3r B ={{' + str(magnetic_field[0]) + ',' + str(magnetic_field[1]) + ',' + str(magnetic_field[2]) + ',' + str(0) + '}}; // external magnetic field\n')
-        if device.lower() == 'cpu':
+            kernel_header.write('__constant static const v3r B ={{' + str(magnetic_field[0]) + ',' + str(magnetic_field[1]) + ',' + str(magnetic_field[2]) + ',' + str(0) + '}}; // external magnetic field\n')
+        if device.lower() == 'cpu' or not isfile('host.dll'):
             print 'building host...'
             if call('make') != 0:
                 raise Exception('Error making host')
-        self.host = cdll.LoadLibrary('./host.dll')
+        self.host = cdll.LoadLibrary('host.dll')
         print 'initializing OpenCL...'
         self.host.gpu_init(c_uint(self.n), c_uint(work_group_size), byref(self.r_array), byref(self.v_array), byref(self.m_array), byref(self.qe_array), byref(self.qn_array))
     
