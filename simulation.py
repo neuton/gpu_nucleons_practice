@@ -102,12 +102,12 @@ class SimulationScene(Scene):
             kernel_header.write('#define dt2 ' + str(dt/2.) + ' // dt/2\n')
             kernel_header.write('__constant static const v3r B=(v3r)(' + str(magnetic_field[0]) + ',' + str(magnetic_field[1]) + ',' + str(magnetic_field[2]) + ',' + str(0) + '); // external magnetic field\n')
         print 'generating host header...'
-        with open('host.h', 'w') as kernel_header:
-            kernel_header.write('#define ln ' + str(work_group_size) + ' // work group size\n')
-            kernel_header.write('#define dt ' + str(dt) + ' // iteration delta-time\n')
-            kernel_header.write('#define td ' + str(1./dt) + ' // 1/dt\n')
-            kernel_header.write('#define dt2 ' + str(dt/2.) + ' // dt/2\n')
-            kernel_header.write('__constant static const v3r B ={{' + str(magnetic_field[0]) + ',' + str(magnetic_field[1]) + ',' + str(magnetic_field[2]) + ',' + str(0) + '}}; // external magnetic field\n')
+        with open('host.h', 'w') as host_header:
+            host_header.write('#define ln ' + str(work_group_size) + ' // work group size\n')
+            host_header.write('#define dt ' + str(dt) + ' // iteration delta-time\n')
+            host_header.write('#define td ' + str(1./dt) + ' // 1/dt\n')
+            host_header.write('#define dt2 ' + str(dt/2.) + ' // dt/2\n')
+            host_header.write('static const v3r B ={{' + str(magnetic_field[0]) + ',' + str(magnetic_field[1]) + ',' + str(magnetic_field[2]) + ',' + str(0) + '}}; // external magnetic field\n')
         if device.lower() == 'cpu' or not isfile('host.dll'):
             print 'building host...'
             if call('make') != 0:
