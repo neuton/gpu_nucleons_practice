@@ -83,7 +83,7 @@ class SimulationScene(Scene):
         The main scene.
     """
     
-    def __init__(self, sceneManager, device='gpu', scene_setting='1', magnetic_field=[0,0,0], dt=0.01, kernel_iterations=10, work_group_size=64):
+    def __init__(self, sceneManager, device='gpu', scene_setting='1', dt=0.01, kernel_iterations=10, work_group_size=64):
         self.sceneManager = sceneManager
         self.kernel_iterations = kernel_iterations
         self.work_group_size = work_group_size

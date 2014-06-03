@@ -72,7 +72,6 @@ class Application(OgreApplication):
         # dt -- delta-time between iterations
         # kernel_iterations -- number of iterations between data transfer and visual update (10 is default)
         # work_group_size -- size of OpenCL work-group (64 is default)
-        # magnetic_field -- external magnetic field; should be list with 3 elements, for example: [123, 1, 0.5]
         #
         self.scene = SimulationScene(sm, device='gpu', scene_setting='1', dt=0.05, kernel_iterations=10) # <---
         #
