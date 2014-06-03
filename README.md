@@ -10,7 +10,7 @@ Requirements
 - make
 - python (2.*)
 - python-ogre (download OGRE, OIS and "plugins" and place them into the root directory:
-https://www.dropbox.com/sh/4i852xb5w9i2dtr/AACE6H5EkiKNDD0jkYht77UGa (for Windows))
+https://www.dropbox.com/sh/4i852xb5w9i2dtr/AACE6H5EkiKNDD0jkYht77UGa (x32 libs for Windows))
 
 Note: gcc bitness and python bitness must be the same (in case of MinGW -- x32)
 
