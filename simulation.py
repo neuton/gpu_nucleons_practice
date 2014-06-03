@@ -74,6 +74,7 @@ class ParticlesContainer(SceneObject):
 from time import clock
 from subprocess import call
 from ctypes import cdll, Structure, c_float, c_uint, c_int, byref
+from os.path import isfile
 
 class V3r(Structure):
     _fields_ = [("x", c_float), ("y", c_float), ("z", c_float), ("w", c_float)] # cl_float4
@@ -93,33 +94,33 @@ class SimulationScene(Scene):
             self._scene_setting_1()
         elif scene_setting == '2':
             self._scene_setting_2()
-        read_lines = ''
         write_lines = ''
-        with open('kernel.h', 'r+') as kernel_header:
-            for line in kernel_header:
-                read_lines += line
-            write_lines += '#define ln ' + str(work_group_size) + ' // work group size\n'
-            write_lines += '#define dt ' + str(dt) + ' // iteration delta-time\n'
-            write_lines += '#define td ' + str(1./dt) + ' // 1/dt\n'
-            write_lines += '#define dt2 ' + str(dt/2.) + ' // dt/2\n'
-            if write_lines != read_lines:
-                print 'generating kernel header...'
-                kernel_header.seek(0)
+        read_lines = ''
+        write_lines += '#define ln ' + str(work_group_size) + ' // work group size\n'
+        write_lines += '#define dt ' + str(dt) + ' // iteration delta-time\n'
+        write_lines += '#define td ' + str(1./dt) + ' // 1/dt\n'
+        write_lines += '#define dt2 ' + str(dt/2.) + ' // dt/2\n'
+        if isfile('kernel.h'):
+            with open('kernel.h', 'r') as kernel_header:
+                for line in kernel_header:
+                    read_lines += line
+        if write_lines != read_lines:
+            print 'generating kernel header...'
+            with open('kernel.h', 'w') as kernel_header:
                 kernel_header.write(write_lines)
-                kernel_header.truncate()
-        read_lines = ''
         write_lines = ''
-        with open('host.h', 'r+') as host_header:
-            for line in host_header:
-                read_lines += line
-            write_lines += '#define dt ' + str(dt) + ' // iteration delta-time\n'
-            write_lines += '#define td ' + str(1./dt) + ' // 1/dt\n'
-            write_lines += '#define dt2 ' + str(dt/2.) + ' // dt/2\n'
-            if write_lines != read_lines:
-                print 'generating host header...'
-                host_header.seek(0)
+        read_lines = ''
+        write_lines += '#define dt ' + str(dt) + ' // iteration delta-time\n'
+        write_lines += '#define td ' + str(1./dt) + ' // 1/dt\n'
+        write_lines += '#define dt2 ' + str(dt/2.) + ' // dt/2\n'
+        if isfile('host.h'):
+            with open('host.h', 'r') as host_header:
+                for line in host_header:
+                    read_lines += line
+        if write_lines != read_lines:
+            print 'generating host header...'
+            with open('host.h', 'w') as host_header:
                 host_header.write(write_lines)
-                host_header.truncate()
         print 'building host...'
         if call('make') != 0:
             raise Exception('Error making host')
