@@ -58,7 +58,8 @@ void compute_forces(__global const v3r * r,
 		k = (k+ln)%n;
 	}
 	// if particle is not massless, update global a array:
-	if (m0>0) a[id] = (f + qe0*cross(v[id], B))/m0;
+	//if (m0>0) a[id] = (f + qe0*cross(v[id], B))/m0;
+	if (m0>0) a[id] = f/m0;
 }
 
 __kernel __attribute__((reqd_work_group_size(ln, 1, 1)))

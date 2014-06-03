@@ -51,7 +51,7 @@ $(LIB).dll: $(LIB).o opencl.o cl_error.o
 	@echo making $(LIB) ...
 	@$(CC) -shared $(LIB).o opencl.o cl_error.o -o $(LIB).dll -L"$(CLLIB)" -lOpenCL $(FOPENMP)
 
-$(LIB).o: $(LIB).c opencl.h Makefile $(MAKEINC)
+$(LIB).o: $(LIB).c opencl.h Makefile $(MAKEINC) $(LIB).h
 	$(ERROR)
 	@echo making $(LIB).o ...
 	@$(CC) $(CCFLAGS) -c -I"$(CLINC)" $(LIB).c -o $(LIB).o $(FOPENMP)
@@ -71,7 +71,7 @@ $(TEST).exe: $(TEST).o opencl.o cl_error.o
 	@echo making $(TEST) ...
 	@$(CC) $(TEST).o opencl.o cl_error.o -o $(TEST).exe -L"$(CLLIB)" -lOpenCL $(FOPENMP)
 
-$(TEST).o: $(TEST).c $(LIB).c opencl.h Makefile $(MAKEINC)
+$(TEST).o: $(TEST).c $(LIB).c opencl.h Makefile $(MAKEINC) $(LIB).h
 	$(ERROR)
 	@echo making $(TEST).o ...
 	@$(CC) -Wall -O2 -c -I"$(CLINC)" $(TEST).c -o $(TEST).o $(FOPENMP)

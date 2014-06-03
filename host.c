@@ -95,9 +95,12 @@ extern void cpu_update(const uint n, v3r r[], v3r v[], const real m[], const int
 					f.z += dr.z * fs;
 				}
 			}
-			f.x = (f.x + qe0*(v[j].y*B.z - v[j].z*B.y))/m[j];
-			f.y = (f.y + qe0*(v[j].z*B.x - v[j].x*B.z))/m[j];
-			f.z = (f.z + qe0*(v[j].x*B.y - v[j].y*B.x))/m[j];
+			//f.x = (f.x + qe0*(v[j].y*B.z - v[j].z*B.y))/m[j];
+			//f.y = (f.y + qe0*(v[j].z*B.x - v[j].x*B.z))/m[j];
+			//f.z = (f.z + qe0*(v[j].x*B.y - v[j].y*B.x))/m[j];
+			f.x = f.x/m[j];
+			f.y = f.y/m[j];
+			f.z = f.z/m[j];
 			r[j].x += dt * (v[j].x + dt2 * f.x);
 			r[j].y += dt * (v[j].y + dt2 * f.y);
 			r[j].z += dt * (v[j].z + dt2 * f.z);

@@ -7,7 +7,7 @@ CC = gcc
 CCFLAGS = -Wall -O2
 TEST = test
 LIB = host
-BUILDTEST = yes
+BUILDTEST = no
 OPENMP = no
 
 ## please, manually define (and uncomment) OpenCL SDK paths here in case You use some other than AMD APP SDK
