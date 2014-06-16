@@ -5,11 +5,11 @@ This is a simple python (with python-ogre) + C + OpenCL toy implementation of si
 Requirements
 --------------
 - Windows
-- OpenCL SDK
-- gcc
-- make
-- python (2.*)
-- python-ogre (download OGRE, OIS and "plugins" and place them into the root directory:
+- OpenCL SDK (AMD APP SDK: http://developer.amd.com/tools-and-sdks/opencl-zone/opencl-tools-sdks/amd-accelerated-parallel-processing-app-sdk/; CUDA Toolkit: https://developer.nvidia.com/cuda-downloads)
+- gcc (for example, from MinGW http://www.mingw.org/)
+- make (http://gnuwin32.sourceforge.net/packages/make.htm)
+- Python (version 2.* https://www.python.org/downloads/)
+- Python-Ogre (download OGRE, OIS and "plugins" and place them into the root directory:
 https://www.dropbox.com/sh/4i852xb5w9i2dtr/AACE6H5EkiKNDD0jkYht77UGa (x32 libs for Windows))
 
 Note: gcc bitness and python bitness must be the same (in case of MinGW -- x32)
