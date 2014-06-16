@@ -68,7 +68,7 @@ class Application(OgreApplication):
         # main scene init here:
         # ------------------------------------------------------------------------------------------------
         # device -- may be "cpu" or "gpu"
-        # scene_setting -- may be "1" or "2" (number of particles defined there)
+        # scene_setting -- may be "1" or "2" (number of particles is defined there)
         # dt -- delta-time between iterations
         # kernel_iterations -- number of iterations between data transfer and visual update (10 is default)
         # work_group_size -- size of OpenCL work-group (64 is default)
