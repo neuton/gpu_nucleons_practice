@@ -52,9 +52,11 @@ Tasks
 --------------
 - download and successfully run (don't forget to meet requirements)
 - tune strong interaction (potential) so that simulation would look at least slightly plausible
-- write your own fast, clear and simple visualization code (OGRE is an overkill for this purpose, I'd recommend using OpenGL-OpenCL interoperability through shared context and VBO); note that this is a heavy task though; you may use, for example, particles simulation code from CUDA OpenCL examples
+- write your own fast, clear and simple visualization code (OGRE is an overkill for this purpose, I'd recommend using OpenGL-OpenCL interoperability through shared context and VBO); note that this is a heavy task though; you may use, for example, particles simulation code from CUDA OpenCL samples
 - maybe create some user interface (UI), for example with QT (PyQT or whatever)
 - experiment more with particles interactions; any ideas and improvements concerning algorithm/model/potentials etc. are welcome; maybe try to implement "solid spheres" collisions
+- create some interesting setting for simulation (the setting is chosen with the "scene_setting" argument when creating a scene); for example, try to simulate something similar to actual events in ions colliders; note that simulation settings are implemented in "simulation.py", so you'll probably need some basic Python knowledge for this task
+- add some other sorts of particles; note that you'll probably need some basic Python knowledge for this task as well
 - play/modify/improve/do whatever you'd like, make some cool things
 
 Contacts
