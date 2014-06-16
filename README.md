@@ -6,7 +6,7 @@ Requirements
 --------------
 - Windows
 - OpenCL SDK (AMD APP SDK: http://developer.amd.com/tools-and-sdks/opencl-zone/opencl-tools-sdks/amd-accelerated-parallel-processing-app-sdk/; CUDA Toolkit: https://developer.nvidia.com/cuda-downloads)
-- gcc (for example, from MinGW http://www.mingw.org/)
+- gcc (included in MinGW http://www.mingw.org/ or Cygwin https://www.cygwin.com/)
 - make (http://gnuwin32.sourceforge.net/packages/make.htm)
 - Python (version 2.* https://www.python.org/downloads/)
 - Python-Ogre (download OGRE, OIS and "plugins" and place them into the root directory:
